@@ -1,0 +1,53 @@
+{% extends 'etl/base.html' %}
+{% block content %}
+
+<div align='center'>
+<h2>Modificación de Usuarios</h2>
+</div>
+<form method="post" enctype="multipart/form-data">
+  <div class="form-group" align="center">
+    {% csrf_token %}
+    {% for field in form %}
+    <p>
+    	{% if field.label|stringformat:"s" == "Contraseña"%}
+    		<div align="center">
+			<label>Cambiar Contraseña:<br><input type='checkbox' class="btn btn-default" onchange="ChangePassword()"></label>
+			</div>
+	        <label for="id_{{ field.name }}" style='display:none'>{{ field.label }}:</label>
+	        {{ field }}
+	    {% elif field.label|stringformat:"s" == "Confirmar Contraseña"%}
+	    	<label for="id_{{ field.name }}" style='display:none'>{{ field.label }}:</label>
+	        {{ field }}
+        {% else %}
+	        <label for="id_{{ field.name }}">{{ field.label }}:</label>
+	        {{ field }}
+        {% endif %}
+    <p>    
+    {% endfor %}
+    <a href="/options">
+   		<button type='button' class="btn btn-default" style="background-color:#2E2E2E;color:#FFFFFF">Cancelar</button>
+	</a>
+    <button type="submit" class="btn btn-default" style="background-color:#ba1414;color:#FFFFFF" >Editar Usuario</button>
+  </div>
+</form>
+<script type="text/javascript">
+function ChangePassword() {
+	var state= document.getElementById("id_password").getAttribute("style")
+	document.getElementById('id_password').value = "";
+	document.getElementById('id_password2').value = "";
+	if (state.includes("none"))
+	{
+	$("#id_password").show(250)
+	$("label[for='id_password']").show(250)
+	$("#id_password2").show(250)
+	$("label[for='id_password2']").show(250)
+	} 
+	else {
+			$("#id_password").hide(250)
+			$("label[for='id_password']").hide(250)
+			$("#id_password2").hide(250)
+			$("label[for='id_password2']").hide(250)
+		}
+}
+</script>
+{% endblock %}

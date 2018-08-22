@@ -1,0 +1,10 @@
+Estimado %s Para REINICIAR su CONTRASEÑA del aplicativo de carga de datos de la Gobernación del atlántico,
+Click al siguiente enlace:
+
+http://127.0.0.1:8000/password_reset_confirm/%s
+
+Si el haciendo click el link no funciona, copie y pegue el link en su navegador de preferencia.
+
+Cordialmente,
+Secretaria TIC de la Gobernación del Atlántico
+

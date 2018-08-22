@@ -1,0 +1,19 @@
+{% extends 'etl/base.html' %}
+{% block content %}
+<div align='center'>
+<h2>Creación de Usuarios</h2>
+</div>
+<form method="post" enctype="multipart/form-data">
+  <div class="form-group" align="center">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <a href="/options">
+   		<button type='button' class="btn btn-default" style="background-color:#2E2E2E;color:#FFFFFF">Cancelar</button>
+	</a>
+    <button type="submit" class="btn btn-default" style="background-color:#ba1414;color:#FFFFFF" >Crear Usuario</button>
+  </div>
+</form>
+<div align='center'>
+<h2>{{ info }}</h2>
+</div>
+{% endblock %}

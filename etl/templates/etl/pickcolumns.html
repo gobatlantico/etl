@@ -1,0 +1,64 @@
+{% extends 'etl/base.html' %}
+{% block content %}
+
+
+<form method="post"enctype="multipart/form-data">
+<div style="text-align: center;">
+	<div style = "display: inline-block; text-align: left;">
+	    {% csrf_token %}
+      <p></p>
+      {% for field in form%}
+	    {{ field.label_tag}}
+      <div>
+      {{ field }}
+      </div>
+      {% endfor %}
+      <p></p>
+  </div>
+ </div>
+ <a href="/metadataexcel">
+  <div align='center'>
+      <button type='button' class="btn btn-default" style="background-color:#2E2E2E;color:#FFFFFF">Regresar</button>
+      </a>
+      <button type="submit" class="btn btn-default" style="background-color:#ba1414;color:#FFFFFF" >Siguiente</button>
+  </div>
+</form>
+<br>
+
+
+<span id="txt"></span>
+<div class="table-responsive" align="center" style="margin-left:10%; margin-right:10%;overflow-x:auto">
+	{{ExcelFile|safe}}
+</div>
+
+
+
+<script type="text/javascript">
+
+$(document).ready( function () {
+    $('#my_table').DataTable({
+      "responsive": true,
+      "pageLength": 15,
+      /*Changing datatables language to spanish*/
+         "language": {
+          "paginate": {
+                "first":      "Primera",
+                "last":       "Última",
+                "next":       "Siguiente",
+                "previous":   "Anterior"
+                },
+            "lengthMenu": "Mostrando _MENU_ Resultados por Página",
+            "zeroRecords": "No existen registros con los datos de búsqueda",
+            "info": "Mostrando Página _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros",
+            "infoFiltered": "(Filtrado de _MAX_ registros totales)",
+            "search":"Buscar:"
+        },
+        /*Setting Menu length*/
+        "lengthMenu": [ [5, 15, 45, -1], [5, 15, 45, "Todos"] ]
+
+    });
+} );
+
+</script>
+{% endblock %}

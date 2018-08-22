@@ -1,0 +1,104 @@
+{% extends 'etl/base.html' %}
+{% block content %}
+
+<div align='center'>
+<h2>Seleccione Usuario a Editar</h2>
+</div>
+<br>
+<div align=center>
+	<div align="center" style="margin-left:10%; margin-right:10%;overflow-x:auto" >
+    {{table|safe}}
+	</div>
+<!--    
+<form method="post" enctype="multipart/form-data">   
+{% csrf_token %}
+ -->	
+    <a href="/options">
+   		<button type='button' class="btn btn-default" style="background-color:#2E2E2E;color:#FFFFFF">Cancelar</button>
+	</a>
+
+	<!--
+    <button type="submit" class="btn btn-default" style="background-color:#ba1414;color:#FFFFFF" >Editar Usuario</button>
+	-->
+
+    <button id="Editar" class="btn btn-default" style="background-color:#ba1414;color:#FFFFFF" >Editar Usuario</button>
+
+<!--
+</form>
+-->
+</div>    
+
+
+
+<script>
+$(document).ready(function() {
+	// Generate a DataTable Object 
+    var table = $('#my_table').DataTable({
+        "responsive": true,
+        "pageLength": -1,
+         /*Changing datatables language to spanish*/
+         "language": {
+            "paginate": {
+                "first":      "Primera",
+                "last":       "Última",
+                "next":       "Siguiente",
+                "previous":   "Anterior"
+                },
+            "lengthMenu": "Mostrando _MENU_ Resultados por Página",
+            "zeroRecords": "No existen registros con los datos de búsqueda",
+            "info": "Mostrando Página _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros",
+            "infoFiltered": "(Filtrado de _MAX_ registros totales)",
+            "search":"Buscar:"
+        },
+        /*Setting Menu length*/
+        "lengthMenu": [ [5, 15, 45, -1], [5, 15, 45, "Todos"] ]
+    });
+    //Disable Editar button
+    document.getElementById("Editar").disabled = true;	
+    //Django URL
+ 	URL="selectusers"
+ 	//Row Selection function
+    $('#my_table tbody').on( 'click', 'tr', function () 
+    {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+            document.getElementById("Editar").disabled = true;
+        }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            document.getElementById("Editar").disabled = false;
+        }
+    } );
+ 	//GET method, when Editar button is clicked 
+    $('#Editar').click( function () 
+    {	// User id
+    	var celda = table.cell('.selected',':contains(id)').data()
+ 		//alert(celda)
+ 		//Json data that will be senden to the server
+ 		var data={'celda':celda}
+ 		var URL ="selectusers";
+ 		//ajax GET method
+ 		$.ajax(
+        {
+	        method: 'GET',
+	        url: '/selectusers',
+	        data: {'celda': celda},
+	        success: function (data) {
+	             //this gets called when server returns an OK response
+	             //alert("it worked!");
+	             //Redirecting
+	             window.location.href = '/modifyusers'
+
+	        },
+	        error: function (data) {
+	             //alert("it didnt work");
+	        }
+    	});
+    } );
+
+} );
+</script>
+
+{% endblock %}

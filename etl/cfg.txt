@@ -1,0 +1,2 @@
+{"web":"datos.gov.co", "email":"tuemail@tuemail.com", "password":"yourpassword", "token":"yourtoken",
+"ip":"localhost", "port":1521, "SID":"xe", "DBuser":"admin", "DBpassword":"tupassword"}

@@ -1,0 +1,15 @@
+{% extends 'etl/base.html' %}
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">
+  <div class="form-group" align="center">
+    {% csrf_token %}
+    {{form.as_p}}
+    <a href="/modify">
+   		<button type='button' class="btn btn-default" style="background-color:#2E2E2E;color:#FFFFFF">Regresar</button>
+	</a>
+    <button type="submit" class="btn btn-default" style="background-color:#ba1414;color:#FFFFFF" >Siguiente</button>
+  </div>
+</form>
+
+{% endblock %}

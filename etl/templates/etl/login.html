@@ -1,0 +1,29 @@
+{% extends 'etl/base.html' %}
+
+{% block content %}
+<form method="post">
+  <div class="form-group" align="center">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-default" style="background-color:#ba1414; color:#FFFFFF" >Ingresar</button><br><br>
+    <a href="/password_reset">Olvidé mi Contraseña</a>
+  </div>
+</form>
+<div align='center'>
+</div>
+{% endblock %}
+
+<!-- Form by HTML
+<form align="center">
+  <div class="form-group" align="center">
+    <label for="email">Correo electrónico:</label>
+    <input type="email" class="form-control" id="email" style="width:30%;">
+  </div>
+  <div class="form-group" align="center">
+    <label for="pwd">Contraseña:</label>
+    <input type="password" class="form-control" id="pwd" style="width:30%;">
+  </div>
+  <button type="submit" class="btn btn-default" style="background-color:#ba1414;color:#FFFFFF" >Ingresar</button>
+</form>
+</p>
+-->
